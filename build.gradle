@@ -4,12 +4,16 @@ plugins {
 
 group 'com.revature'
 version '1.0-SNAPSHOT'
-mainClassName = 'com.revature..yahoo.stock.api'
+//mainClassName = 'com.revature..yahoo.stock.api'
 
-jar{
-    manifest{
-        attributes 'Main-Class': mainClassName
-    }
+//jar{
+//    manifest{
+//        attributes 'Main-Class': mainClassName
+//    }
+//}
+
+application {
+    mainClass = 'com.revature.main'
 }
 
 repositories {

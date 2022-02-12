@@ -16,7 +16,8 @@ public class YahooStockAPI {
         StockDto dto = null;
         try {
             Stock stock = YahooFinance.get(stockTicker);
-            dto = new StockDto(stock.getName(), stock.getQuote().getPrice(), stock.getQuote().getChange(), stock.getCurrency(), stock.getQuote().getBid());
+            dto = new StockDto(stock.getName(), stock.getQuote().getPrice(), stock.getQuote().getChange(),
+                    stock.getCurrency(), stock.getQuote().getBid());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,10 +68,4 @@ public class YahooStockAPI {
         return interval;
     }
 
-    public static void main(String[] args) {
-        YahooStockAPI yahooStockAPI = new YahooStockAPI();
-        System.out.println(yahooStockAPI.getStock("AAPL"));
-
-        yahooStockAPI.getHistory("PLTR", 1, "monthly");
-    }
 }
