@@ -32,7 +32,6 @@ public class YahooStockAPI {
             Stock stock = YahooFinance.get(stockName);
             List<HistoricalQuote> history = stock.getHistory(from, to, getInterval(searchType));
             for (HistoricalQuote quote : history) {
-
                 System.out.println("Symbol: " + quote.getSymbol());
                 System.out.println("Date: " + convertDate(quote.getDate()));
                 System.out.println("High Price: " + quote.getHigh());
@@ -48,8 +47,7 @@ public class YahooStockAPI {
 
     private String convertDate(Calendar cal) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = format.format(cal.getTime());
-        return formattedDate;
+        return format.format(cal.getTime());
     }
 
     private Interval getInterval(String searchType) {

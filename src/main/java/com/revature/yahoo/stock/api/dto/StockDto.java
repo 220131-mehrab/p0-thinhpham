@@ -63,12 +63,8 @@ public class StockDto {
 
     @Override
     public String toString() {
-        return "StockDto{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", change=" + change +
-                ", currency='" + currency + '\'' +
-                ", bid=" + bid +
-                '}';
+
+        return " Name: " + name + ", Price: " + price + ", Change: " + change + ", Currency: " + currency +
+                ", Bid: " + bid;
     }
 }
