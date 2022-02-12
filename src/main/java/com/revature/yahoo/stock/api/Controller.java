@@ -32,7 +32,14 @@ public class Controller {
                     System.out.println(this.yahooStockAPI.getStock(ticker));
                     break;
                 case 3:
-                    this.yahooStockAPI.getHistory("AAPL","2018-07-17", "2019-07-18","daily");
+                    String ticker1 = TickerInput();
+                    System.out.print("Please enter your start date ");
+                    String from = DateInput();
+                    System.out.print("\n Please enter your end date ");
+                    String to = DateInput();
+                    String interval = IntervalInput();
+                    System.out.println("\n");
+                    this.yahooStockAPI.getHistory(ticker1, from, to, interval);
                     break;
                 case 8:
                     isExit = true;
@@ -57,5 +64,20 @@ public class Controller {
         ticker = new Scanner(System.in).nextLine();
         return ticker;
     }
+
+    private String DateInput() {
+        String date;
+        System.out.print(" (yyyy-mm-dd): ");
+        date = new Scanner(System.in).nextLine();
+        return date;
+    }
+
+    private String IntervalInput() {
+        String interval;
+        System.out.print("\nEnter 'Yearly' 'Monthly' or 'Daily' : ");
+        interval = new Scanner(System.in).nextLine();
+        return interval;
+    }
+
 
 }

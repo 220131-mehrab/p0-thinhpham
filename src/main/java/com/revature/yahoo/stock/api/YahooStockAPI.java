@@ -5,8 +5,6 @@ import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
-import yahoofinance.histquotes2.HistoricalDividend;
-import yahoofinance.quotes.stock.StockDividend;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -81,7 +79,7 @@ public class YahooStockAPI {
         return format.format(cal.getTime());
     }
 
-    public Calendar convertDate(String cal) {
+    private Calendar convertDate(String cal) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
