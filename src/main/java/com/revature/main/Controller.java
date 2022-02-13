@@ -1,4 +1,6 @@
-package com.revature.yahoo.stock.api;
+package com.revature.main;
+
+import com.revature.yahoo.stock.api.YahooStockAPI;
 
 import java.util.Calendar;
 import java.util.Scanner;
@@ -40,6 +42,7 @@ public class Controller {
                     String interval = IntervalInput();
                     System.out.println("\n");
                     this.yahooStockAPI.getHistory(ticker1, from, to, interval);
+                    this.yahooStockAPI.WriteToFile(ticker1, from, to, interval);
                     break;
                 case 8:
                     isExit = true;
@@ -53,6 +56,7 @@ public class Controller {
                 .append("1. Select 1 to reprint menu\n")
                 .append("2. Select 2 to watch the most recent stock\n")
                 .append("3. Select 3 to watch history of stock with an amount of time\n")
+                .append("4. Select 4 to write to a csv file\n")
                 .append("8. Select 8 to exit\n")
                 .append("Please enter: ");
         System.out.print(menu);
