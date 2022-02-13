@@ -1,9 +1,10 @@
 package com.revature.main;
 
+import com.revature.Server.FileRepository;
+import com.revature.Server.StockServer;
+import com.revature.Server.StockService;
 import com.revature.yahoo.stock.api.YahooStockAPI;
 
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Controller {
@@ -29,6 +30,9 @@ public class Controller {
                     break;
                 case 2:
                     StockDataController();
+                    break;
+                case 3:
+                    PrintToServer();
                     break;
                 case 8:
                     isExit = true;
@@ -82,6 +86,15 @@ public class Controller {
         if (selection.equals("y")) {
             this.yahooStockAPI.WriteToFile(ticker1, from, to, interval);
         }
+    }
+
+    private void PrintToServer() {
+        System.out.print("\nEnter the name of the file: ");
+        String fileName = new Scanner(System.in).nextLine();
+        String fileSource = fileName + ".csv";
+        FileRepository fileRepository = new FileRepository(fileSource);
+        StockService stockService = new StockService(fileRepository);
+        StockServer stockServer = new StockServer(stockService);
     }
 
 
