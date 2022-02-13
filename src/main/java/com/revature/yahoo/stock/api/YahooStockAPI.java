@@ -64,6 +64,7 @@ public class YahooStockAPI {
         List<HistoricalQuote> history = null;
         try {
             Stock stock = YahooFinance.get(stockName);
+            //The getHistory function of stock variable is not a recursive call but instead the Yahoo API function
             history = stock.getHistory(fromDate, toDate, getInterval(searchType));
             for (HistoricalQuote quote : history) {
                 System.out.println("Symbol: " + quote.getSymbol());

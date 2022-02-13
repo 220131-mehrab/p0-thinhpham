@@ -3,6 +3,7 @@ package com.revature.main;
 import com.revature.yahoo.stock.api.YahooStockAPI;
 
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Controller {
@@ -19,30 +20,15 @@ public class Controller {
         boolean isExit = false;
 
         do {
-//            String dateS = "2021-07-17";
-//            Calendar date = this.yahooStockAPI.convertDate(dateS);
-//            System.out.println(date);
-//            this.yahooStockAPI.getHistory("AAPL", 2021, "monthly");
             Menu();
             selection = new Scanner(System.in).nextInt();
             switch (selection) {
                 case 1:
-                    Menu();
-                    break;
-                case 2:
                     String ticker = TickerInput();
                     System.out.println(this.yahooStockAPI.getStock(ticker));
                     break;
-                case 3:
-                    String ticker1 = TickerInput();
-                    System.out.print("Please enter your start date ");
-                    String from = DateInput();
-                    System.out.print("\n Please enter your end date ");
-                    String to = DateInput();
-                    String interval = IntervalInput();
-                    System.out.println("\n");
-                    this.yahooStockAPI.getHistory(ticker1, from, to, interval);
-                    this.yahooStockAPI.WriteToFile(ticker1, from, to, interval);
+                case 2:
+                    StockDataController();
                     break;
                 case 8:
                     isExit = true;
@@ -53,10 +39,9 @@ public class Controller {
 
     public void Menu() {
         StringBuilder menu = new StringBuilder("\tWelcome to the Stock History App\n")
-                .append("1. Select 1 to reprint menu\n")
-                .append("2. Select 2 to watch the most recent stock\n")
-                .append("3. Select 3 to watch history of stock with an amount of time\n")
-                .append("4. Select 4 to write to a csv file\n")
+                .append("1. Select 1 to watch the most recent stock\n")
+                .append("2. Select 2 to watch history of stock with an amount of time\n")
+                .append("3. Select 3 to print to website\n")
                 .append("8. Select 8 to exit\n")
                 .append("Please enter: ");
         System.out.print(menu);
@@ -81,6 +66,22 @@ public class Controller {
         System.out.print("\nEnter 'Yearly' 'Monthly' or 'Daily' : ");
         interval = new Scanner(System.in).nextLine();
         return interval;
+    }
+
+    private void StockDataController() {
+        String ticker1 = TickerInput();
+        System.out.print("Please enter your start date ");
+        String from = DateInput();
+        System.out.print("\n Please enter your end date ");
+        String to = DateInput();
+        String interval = IntervalInput();
+        System.out.println("\n");
+        this.yahooStockAPI.getHistory(ticker1, from, to, interval);
+        System.out.print("Do you want to save this data? Choose Y for yes or N for no");
+        String selection = new Scanner(System.in).nextLine().toLowerCase();
+        if (selection.equals("y")) {
+            this.yahooStockAPI.WriteToFile(ticker1, from, to, interval);
+        }
     }
 
 
