@@ -29,34 +29,24 @@ public class YahooStockAPI {
         }
         return dto;
     }
-
-    public List<HistoricalQuote> getHistory(String stockName, int year, String searchType) {
-        Calendar from = Calendar.getInstance();
-        Calendar to = Calendar.getInstance();
-        from.add(Calendar.YEAR, Integer.valueOf("-" + year));
-        try {
-            Stock stock = YahooFinance.get(stockName);
-//            List<HistoricalQuote> history = stock.getHistory(from, to, getInterval(searchType));
-//            for (HistoricalQuote quote : history) {
-//                System.out.println("Symbol: " + quote.getSymbol());
-//                System.out.println("Date: " + convertDate(quote.getDate()));
-//                System.out.println("High Price: " + quote.getHigh());
-//                System.out.println("Low Price: " + quote.getLow());
-//                System.out.println("Closed Price: " + quote.getClose());
-//                System.out.println("=============================");
-//            }
-
+// This method would be preserved to do the dividend history
+//    public List<HistoricalQuote> getHistory(String stockName, int year, String searchType) {
+//        Calendar from = Calendar.getInstance();
+//        Calendar to = Calendar.getInstance();
+//        from.add(Calendar.YEAR, Integer.valueOf("-" + year));
+//        try {
+//            Stock stock = YahooFinance.get(stockName);
 //            List<HistoricalDividend> quote = stock.getDividendHistory();
 //            quote.forEach((HistoricalDividend s) -> {
 //                System.out.print(s.getAdjDividend());
 //                System.out.print(" ");
 //                System.out.println(convertDate(s.getDate()));
 //            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     public List<HistoricalQuote> getHistory(String stockName, String from, String to, String searchType) {
         Calendar fromDate = convertDate(from);
@@ -66,14 +56,14 @@ public class YahooStockAPI {
             Stock stock = YahooFinance.get(stockName);
             //The getHistory function of stock variable is not a recursive call but instead the Yahoo API function
             history = stock.getHistory(fromDate, toDate, getInterval(searchType));
-            for (HistoricalQuote quote : history) {
+            history.forEach(quote -> {
                 System.out.println("Symbol: " + quote.getSymbol());
                 System.out.println("Date: " + convertDate(quote.getDate()));
                 System.out.println("High Price: " + quote.getHigh());
                 System.out.println("Low Price: " + quote.getLow());
                 System.out.println("Closed Price: " + quote.getClose());
                 System.out.println("=============================");
-            }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

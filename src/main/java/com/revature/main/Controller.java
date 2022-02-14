@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Controller {
 
-    private YahooStockAPI yahooStockAPI;
+    private final YahooStockAPI yahooStockAPI;
 
     public Controller() {
         this.yahooStockAPI = new YahooStockAPI();
