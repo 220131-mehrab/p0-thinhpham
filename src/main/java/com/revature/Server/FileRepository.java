@@ -9,13 +9,18 @@ public class FileRepository {
     private List<String> stockLine;
     private InputStream file;
 
-    public FileRepository(String filename) {
-        this.stockLine = new ArrayList<>();
-        this.file = getClass().getClassLoader().getResourceAsStream(filename);
-        load();
+    public FileRepository() {
     }
 
-    private void load() {
+//    public FileRepository(String filename) {
+//        this.stockLine = new ArrayList<>();
+//        this.file = getClass().getClassLoader().getResourceAsStream(filename);
+//        load();
+//    }
+
+    private void load(String filename) {
+        this.stockLine = new ArrayList<>();
+        this.file = getClass().getClassLoader().getResourceAsStream(filename);
         Scanner scanner = new Scanner(this.file);
         scanner.useDelimiter("\n");
         while (scanner.hasNext()) {
