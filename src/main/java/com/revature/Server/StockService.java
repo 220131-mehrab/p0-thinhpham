@@ -9,15 +9,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class StockService extends HttpServlet {
-    private final FileRepository fileRepository;
-
-    public StockService(FileRepository fileRepository) {
-        this.fileRepository = fileRepository;
-    }
+    private StockCommands stockCommands;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //language=HTML
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String HTMLForm = "<Html>\n" +
                 "<Head>\n" +
                 "    <Title>Stock History" +
@@ -59,10 +54,22 @@ public class StockService extends HttpServlet {
         System.out.println("End: " + ticker);
         String interval = req.getParameter("interval");
         System.out.println("Interval: " + ticker);
-        commandsObj(ticker, startDate, endDate, interval);
+//        getCommandsObj(ticker, startDate, endDate, interval);
+        this.stockCommands = new StockCommands(ticker, startDate, endDate, interval);
     }
 
-    public StockCommands commandsObj(String ticker, String startDate, String endDate, String interval) {
-        return new StockCommands(ticker, startDate, endDate, interval);
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //language=HTML
+
+    }
+
+//    public StockCommands getCommandsObj(String ticker, String startDate, String endDate, String interval) {
+//        return new StockCommands(ticker, startDate, endDate, interval);
+//    }
+
+
+    public StockCommands getStockCommands() {
+        return stockCommands;
     }
 }

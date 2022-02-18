@@ -12,11 +12,11 @@ public class FileRepository {
     public FileRepository() {
     }
 
-//    public FileRepository(String filename) {
+    public FileRepository(String filename) {
 //        this.stockLine = new ArrayList<>();
 //        this.file = getClass().getClassLoader().getResourceAsStream(filename);
-//        load();
-//    }
+        load(filename);
+    }
 
     private void load(String filename) {
         this.stockLine = new ArrayList<>();

@@ -2,7 +2,7 @@ package com.revature.yahoo.stock.api;
 
 import java.math.BigDecimal;
 
-public class Stock {
+public class MyStock {
     private String name;
     private String date;
     private BigDecimal open;
@@ -10,7 +10,7 @@ public class Stock {
     private BigDecimal low;
     private BigDecimal close;
 
-    public Stock(String name, String date, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close) {
+    public MyStock(String name, String date, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close) {
         this.name = name;
         this.date = date;
         this.open = open;

@@ -14,9 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class YahooStockAPI {
+    private Stock myStock;
 //    public StockDto getStock(String stockTicker) {
 //        StockDto dto = null;
 //        try {
@@ -70,12 +70,10 @@ public class YahooStockAPI {
         return history;
     }
 
-    public void WriteToFile(String stockName, String from, String to, String searchType) {
+    public String WriteToFile(String stockName, String from, String to, String searchType) {
         BufferedWriter output = null;
         List<HistoricalQuote> history;
-        System.out.print("\nEnter the name of the file you want to write to: ");
-        String fileName = new Scanner(System.in).nextLine();
-        String fileSource = "src/main/resources/" + fileName + ".csv";
+        String fileSource = "src/main/resources/result.csv";
         System.out.println(fileSource);
         try {
             File file = new File(fileSource);
@@ -101,6 +99,7 @@ public class YahooStockAPI {
                 }
             }
         }
+        return "result.csv";
     }
 
     private String convertDate(Calendar cal) {

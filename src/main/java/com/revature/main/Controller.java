@@ -3,18 +3,14 @@ package com.revature.main;
 import com.revature.Server.FileRepository;
 import com.revature.Server.StockServer;
 import com.revature.Server.StockService;
-import com.revature.yahoo.stock.api.Stock;
+import com.revature.yahoo.stock.api.MyStock;
 import com.revature.yahoo.stock.api.StockCommands;
 import com.revature.yahoo.stock.api.YahooStockAPI;
-
-import java.util.Scanner;
 
 public class Controller {
 
     private final YahooStockAPI yahooStockAPI;
-    private Stock stock;
-    private StockCommands stockCommands;
-
+    private MyStock myStock;
 
     public Controller() {
         this.yahooStockAPI = new YahooStockAPI();
@@ -97,9 +93,16 @@ public class Controller {
 //        System.out.print("\nEnter the name of the file: ");
 //        String fileName = new Scanner(System.in).nextLine();
 //        String fileSource = fileName + ".csv";
-//        FileRepository fileRepository = new FileRepository(fileSource);
-//        StockService stockService = new StockService(fileRepository);
-//        StockServer stockServer = new StockServer(stockService);
+
+//        FileRepository fileRepository = new FileRepository();
+        StockService stockService = new StockService();
+//        StockCommands stockCommands = stockService.getStockCommands();
+//        this.yahooStockAPI.getHistory(stockCommands.getTicker(), stockCommands.getStartDate(),
+//                stockCommands.getEndDate(), stockCommands.getInterval());
+//        this.yahooStockAPI.WriteToFile(stockCommands.getTicker(), stockCommands.getStartDate(),
+//                stockCommands.getEndDate(), stockCommands.getInterval());
+
+        StockServer stockServer = new StockServer(stockService);
     }
 
 
