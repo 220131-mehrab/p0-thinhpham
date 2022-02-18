@@ -25,8 +25,8 @@ public class Controller {
             selection = new Scanner(System.in).nextInt();
             switch (selection) {
                 case 1:
-                    String ticker = TickerInput();
-                    System.out.println(this.yahooStockAPI.getStock(ticker));
+//                    String ticker = TickerInput();
+//                    System.out.println(this.yahooStockAPI.getStock(ticker));
                     break;
                 case 2:
                     StockDataController();

@@ -1,6 +1,5 @@
 package com.revature.yahoo.stock.api;
 
-import com.revature.yahoo.stock.api.dto.StockDto;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
@@ -18,17 +17,17 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class YahooStockAPI {
-    public StockDto getStock(String stockTicker) {
-        StockDto dto = null;
-        try {
-            Stock stock = YahooFinance.get(stockTicker);
-            dto = new StockDto(stock.getName(), stock.getQuote().getPrice(), stock.getQuote().getChange(),
-                    stock.getCurrency(), stock.getQuote().getBid());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return dto;
-    }
+//    public StockDto getStock(String stockTicker) {
+//        StockDto dto = null;
+//        try {
+//            Stock stock = YahooFinance.get(stockTicker);
+//            dto = new StockDto(stock.getName(), stock.getQuote().getPrice(), stock.getQuote().getChange(),
+//                    stock.getCurrency(), stock.getQuote().getBid());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return dto;
+//    }
 // This method would be preserved to do the dividend history
 //    public List<HistoricalQuote> getHistory(String stockName, int year, String searchType) {
 //        Calendar from = Calendar.getInstance();
@@ -54,6 +53,7 @@ public class YahooStockAPI {
         List<HistoricalQuote> history = null;
         try {
             Stock stock = YahooFinance.get(stockName);
+
             //The getHistory function of stock variable is not a recursive call but instead the Yahoo API function
             history = stock.getHistory(fromDate, toDate, getInterval(searchType));
             history.forEach(quote -> {
@@ -88,6 +88,7 @@ public class YahooStockAPI {
                 output.write(quote.getHigh() + ",");
                 output.write(quote.getLow() + ",");
                 output.write(quote.getClose() + "\n");
+
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -11,6 +11,7 @@ public class StockServer {
         this.server.getConnector();
         this.server.addContext("",null);
         this.server.addServlet("","Stock Servlet", stockService).addMapping("/");
+        this.server.addServlet("","fddgs", new testClassSerlet()).addMapping("/myTest");
         try {
             this.server.start();
         } catch (LifecycleException e) {
