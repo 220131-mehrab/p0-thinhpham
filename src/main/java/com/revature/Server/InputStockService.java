@@ -8,11 +8,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class StockService extends HttpServlet {
+public class InputStockService extends HttpServlet {
     private StockCommands stockCommands;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String HTMLForm = "<Html>\n" +
                 "<Head>\n" +
                 "    <Title>Stock History" +
@@ -23,7 +29,7 @@ public class StockService extends HttpServlet {
                 "<p>This app will allow to see the price of a stock</p>\n" +
                 "<p>Input the stock ticker. Ex: IBM, AAPL, or VOO</p>\n" +
                 "<p>Date for as yyyy-mm-dd</p>\n" +
-                "<form action='' method='get'>\n" +
+                "<form action='/receive' method='get'>\n" +
                 "    <div class=\"form-example\">\n" +
                 "        <label for=\"ticker\">Stock Ticker: </label>\n" +
                 "        <input type=\"text\" name=\"ticker\" id=\"ticker\" required>\n" +
@@ -46,30 +52,16 @@ public class StockService extends HttpServlet {
                 "</Body>\n" +
                 "</Html>";
         resp.getWriter().println(HTMLForm);
-        String ticker = req.getParameter("ticker");
-        System.out.println("Ticker: " + ticker);
-        String startDate = req.getParameter("startDate");
-        System.out.println("Start: " + ticker);
-        String endDate = req.getParameter("endDate");
-        System.out.println("End: " + ticker);
-        String interval = req.getParameter("interval");
-        System.out.println("Interval: " + ticker);
-//        getCommandsObj(ticker, startDate, endDate, interval);
-        this.stockCommands = new StockCommands(ticker, startDate, endDate, interval);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //language=HTML
+//        String ticker = req.getParameter("ticker");
+//        System.out.println("Ticker: " + ticker);
+//        String startDate = req.getParameter("startDate");
+//        System.out.println("Start: " + ticker);
+//        String endDate = req.getParameter("endDate");
+//        System.out.println("End: " + ticker);
+//        String interval = req.getParameter("interval");
+//        System.out.println("Interval: " + ticker);
 
     }
 
-//    public StockCommands getCommandsObj(String ticker, String startDate, String endDate, String interval) {
-//        return new StockCommands(ticker, startDate, endDate, interval);
-//    }
 
-
-    public StockCommands getStockCommands() {
-        return stockCommands;
-    }
 }

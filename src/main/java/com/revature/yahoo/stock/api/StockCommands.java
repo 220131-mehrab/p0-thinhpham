@@ -6,6 +6,9 @@ public class StockCommands {
     private String endDate;
     private String interval;
 
+    public StockCommands() {
+    }
+
     public StockCommands(String ticker, String startDate, String endDate, String interval) {
         this.ticker = ticker;
         this.startDate = startDate;
