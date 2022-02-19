@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class testClassSerlet extends HttpServlet {
+public class PrintOutServlet extends HttpServlet {
 //    private FileRepository fileRepository;
     private List<String> stockLine;
     private InputStream file;

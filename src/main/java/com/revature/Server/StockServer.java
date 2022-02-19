@@ -1,11 +1,8 @@
 package com.revature.Server;
 
-import com.revature.yahoo.stock.api.StockCommands;
-import com.revature.yahoo.stock.api.YahooStockAPI;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -41,7 +38,7 @@ public class StockServer {
         this.server.addContext("", null);
         this.server.addServlet("", "Input Stock Servlet", this.inputStockService).addMapping("/home");
         this.server.addServlet("", "Receive InputStock Servlet", this.receiveInputServlet).addMapping("/receive");
-        this.server.addServlet("", "fddgs", new testClassSerlet()).addMapping("/myTest");
+        this.server.addServlet("", "fddgs", new PrintOutServlet()).addMapping("/printout");
 
 
 //        this.stockCommands.toString();
