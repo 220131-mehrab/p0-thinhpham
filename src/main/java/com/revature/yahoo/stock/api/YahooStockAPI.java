@@ -11,46 +11,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 public class YahooStockAPI {
     private Stock myStock;
-//    public StockDto getStock(String stockTicker) {
-//        StockDto dto = null;
-//        try {
-//            Stock stock = YahooFinance.get(stockTicker);
-//            dto = new StockDto(stock.getName(), stock.getQuote().getPrice(), stock.getQuote().getChange(),
-//                    stock.getCurrency(), stock.getQuote().getBid());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return dto;
-//    }
-// This method would be preserved to do the dividend history
-//    public List<HistoricalQuote> getHistory(String stockName, int year, String searchType) {
-//        Calendar from = Calendar.getInstance();
-//        Calendar to = Calendar.getInstance();
-//        from.add(Calendar.YEAR, Integer.valueOf("-" + year));
-//        try {
-//            Stock stock = YahooFinance.get(stockName);
-//            List<HistoricalDividend> quote = stock.getDividendHistory();
-//            quote.forEach((HistoricalDividend s) -> {
-//                System.out.print(s.getAdjDividend());
-//                System.out.print(" ");
-//                System.out.println(convertDate(s.getDate()));
-//            });
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
-    public List<HistoricalQuote> getHistory(String stockName, String from, String to, String searchType) {
+    public List<MyStock> getHistory(String stockName, String from, String to, String searchType) {
         Calendar fromDate = convertDate(from);
         Calendar toDate = convertDate(to);
         List<HistoricalQuote> history = null;
+        List<MyStock> stocks = new ArrayList<>();
         try {
             Stock stock = YahooFinance.get(stockName);
 
@@ -63,44 +36,46 @@ public class YahooStockAPI {
                 System.out.println("Low Price: " + quote.getLow());
                 System.out.println("Closed Price: " + quote.getClose());
                 System.out.println("=============================");
+                stocks.add(new MyStock(quote.getSymbol(), convertDate(quote.getDate()), quote.getOpen(), quote.getHigh(), quote.getLow(), quote.getClose()));
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return history;
+        return stocks;
     }
 
-    public String WriteToFile(String stockName, String from, String to, String searchType) {
-        BufferedWriter output = null;
-        List<HistoricalQuote> history;
-        String fileSource = "src/main/resources/result.csv";
-        System.out.println(fileSource);
-        try {
-            File file = new File(fileSource);
-            output = new BufferedWriter(new FileWriter(file));
-            history = getHistory(stockName, from, to, searchType);
-            output.write("Symbol, Date, High Price, Low Price, Closed Price\n");
-            for (HistoricalQuote quote : history) {
-                output.write(quote.getSymbol() + ",");
-                output.write(convertDate(quote.getDate()) + ",");
-                output.write(quote.getHigh() + ",");
-                output.write(quote.getLow() + ",");
-                output.write(quote.getClose() + "\n");
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (output != null) {
-                try {
-                    output.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return "result.csv";
-    }
+//    public String WriteToFile(String stockName, String from, String to, String searchType) {
+//        BufferedWriter output = null;
+//        List<HistoricalQuote> history;
+//        String fileSource = "src/main/resources/result.csv";
+//        System.out.println(fileSource);
+//        try {
+//            File file = new File(fileSource);
+//            output = new BufferedWriter(new FileWriter(file));
+//            history = getHistory(stockName, from, to, searchType);
+//            output.write("Symbol, Date, High Price, Low Price, Closed Price\n");
+//            for (HistoricalQuote quote : history) {
+//                output.write(quote.getSymbol() + ",");
+//                output.write(convertDate(quote.getDate()) + ",");
+//                output.write(quote.getHigh() + ",");
+//                output.write(quote.getLow() + ",");
+//                output.write(quote.getClose() + "\n");
+//
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (output != null) {
+//                try {
+//                    output.close();
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        return "result.csv";
+//    }
 
     private String convertDate(Calendar cal) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
