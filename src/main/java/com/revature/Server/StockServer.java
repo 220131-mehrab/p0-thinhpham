@@ -27,7 +27,7 @@ public class StockServer {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test","sa","");
             String query = "DROP TABLE IF EXISTS mystock;";
             String query2 = "CREATE TABLE mystock(ID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, NAME VARCHAR(255), " +
-                    "DATE VARCHAR(255), OPEN DECIMAL(15), HIGH DECIMAL(15), LOW DECIMAL(15), CLOSE DECIMAL(15));";
+                    "TIME DATE, OPEN DECIMAL(15), HIGH DECIMAL(15), LOW DECIMAL(15), CLOSE DECIMAL(15));";
             Statement statement = connection.createStatement();
             statement.execute(query);
             statement.execute(query2);

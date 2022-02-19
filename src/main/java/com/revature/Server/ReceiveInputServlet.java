@@ -37,26 +37,22 @@ public class ReceiveInputServlet extends HttpServlet {
 //        System.out.println("Interval: " + interval);
 
         stockCommands = new StockCommands(ticker, startDate, endDate, interval);
-        List<MyStock> stockList = this.yahooStockAPI.getHistory(this.stockCommands.getTicker(), this.stockCommands.getStartDate(), this.stockCommands.getEndDate(), this.stockCommands.getInterval());
+        List<MyStock> stockList = this.yahooStockAPI.getHistory(this.stockCommands.getTicker(),
+                this.stockCommands.getStartDate(), this.stockCommands.getEndDate(), this.stockCommands.getInterval());
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
             Statement statement = connection.createStatement();
-//            private String name;
-//            private String date;
-//            private BigDecimal open;
-//            private BigDecimal high;
-//            private BigDecimal low;
-//            private BigDecimal close;
+
             for (MyStock index : stockList) {
                 String name = index.getName();
-                String date = index.getDate();
+                String time = index.getDate();
                 BigDecimal open = index.getOpen();
                 BigDecimal high = index.getHigh();
                 BigDecimal low = index.getLow();
                 BigDecimal close = index.getClose();
 //                String query = "INSERT INTO mystock VALUES('" + name + "', '" + date + "', " + open + ", " + high + ", " + low + ", " + close + ");";
-                String query = "insert into mystock (name, date, open, high, low, close) values ('" + name + "', '" + date + "', " + open + ", " + high + ", " + low + ", " + close + ");";
+                String query = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" + time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
                 System.out.println(query);
                 statement.execute(query);
             }

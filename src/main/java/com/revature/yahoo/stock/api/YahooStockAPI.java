@@ -77,12 +77,12 @@ public class YahooStockAPI {
 //        return "result.csv";
 //    }
 
-    private String convertDate(Calendar cal) {
+    public String convertDate(Calendar cal) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(cal.getTime());
     }
 
-    private Calendar convertDate(String cal) {
+    public Calendar convertDate(String cal) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
@@ -93,7 +93,7 @@ public class YahooStockAPI {
         return calendar;
     }
 
-    private Interval getInterval(String searchType) {
+    public Interval getInterval(String searchType) {
         Interval interval = null;
         switch (searchType.toUpperCase()) {
             case "MONTHLY":
