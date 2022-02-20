@@ -56,7 +56,7 @@ public class ReceiveInputServlet extends HttpServlet {
                 BigDecimal low = index.getLow();
                 BigDecimal close = index.getClose();
                 String query = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" + time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
-                System.out.println(query);
+//                System.out.println(query);
                 statement.execute(query);
                 HTMLContent = name + ", " + time + ", " + open + ", " + high + ", " + low + ", " + close + ".";
                 convertContent = "<p>" + HTMLContent + "</p>" + "\n";
@@ -66,10 +66,20 @@ public class ReceiveInputServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        String HTMLFindMoreStockForm = "<form action =\"/home\" method = \"get\">\n" +
+                "    " +
+                "<input type=\"submit\" value=\"Find more stock history\" name=\"homeRedirect\">\n" +
+                "    <" +
+                "br>\n" +
+                "</form>\n" +
+                "\n";
+        resp.getWriter().println(HTMLFindMoreStockForm);
 
-
-
-
+        String HTMLStockSearchedForm = "<form action =\"/printout\" method = \"get\">\n" +
+                "    <input type=\"submit\" value=\"Print all stock searched\" name=\"printout\">\n" +
+                "    <br>\n" +
+                "</form>\n";
+        resp.getWriter().println(HTMLStockSearchedForm);
     }
 
     public StockCommands getStockCommands() {

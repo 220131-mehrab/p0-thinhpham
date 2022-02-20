@@ -9,11 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class InputStockService extends HttpServlet {
-    private StockCommands stockCommands;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
     }
 
@@ -52,14 +50,6 @@ public class InputStockService extends HttpServlet {
                 "</Body>\n" +
                 "</Html>";
         resp.getWriter().println(HTMLForm);
-//        String ticker = req.getParameter("ticker");
-//        System.out.println("Ticker: " + ticker);
-//        String startDate = req.getParameter("startDate");
-//        System.out.println("Start: " + ticker);
-//        String endDate = req.getParameter("endDate");
-//        System.out.println("End: " + ticker);
-//        String interval = req.getParameter("interval");
-//        System.out.println("Interval: " + ticker);
 
     }
 
