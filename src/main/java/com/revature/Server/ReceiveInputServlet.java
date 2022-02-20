@@ -35,11 +35,15 @@ public class ReceiveInputServlet extends HttpServlet {
 //        System.out.println("End: " + endDate);
         String interval = req.getParameter("interval");
 //        System.out.println("Interval: " + interval);
-
+        String HTMLContent = "";
+        String convertContent = "";
         stockCommands = new StockCommands(ticker, startDate, endDate, interval);
         List<MyStock> stockList = this.yahooStockAPI.getHistory(this.stockCommands.getTicker(),
                 this.stockCommands.getStartDate(), this.stockCommands.getEndDate(), this.stockCommands.getInterval());
+        String HTMLTitle = "<h3" +
+                ">Symbol, Date, Open Price, High Price, Low Price, Closed Price</h3>";
 
+        resp.getWriter().println(HTMLTitle);
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
             Statement statement = connection.createStatement();
@@ -51,19 +55,20 @@ public class ReceiveInputServlet extends HttpServlet {
                 BigDecimal high = index.getHigh();
                 BigDecimal low = index.getLow();
                 BigDecimal close = index.getClose();
-//                String query = "INSERT INTO mystock VALUES('" + name + "', '" + date + "', " + open + ", " + high + ", " + low + ", " + close + ");";
                 String query = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" + time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
                 System.out.println(query);
                 statement.execute(query);
+                HTMLContent = name + ", " + time + ", " + open + ", " + high + ", " + low + ", " + close + ".";
+                convertContent = "<p>" + HTMLContent + "</p>" + "\n";
+                resp.getWriter().println(convertContent);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        String HTMLForm = "<p>A csv file has been generated</p>\n" +
-//                "<form action='/myTest' method='get'>\n" +
-//                "    " +
-//                "    <label></label>\n" +
-//                "</form>";
+
+
+
+
 
     }
 
