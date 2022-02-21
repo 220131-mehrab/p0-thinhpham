@@ -55,6 +55,7 @@ public class ReceiveInputServlet extends HttpServlet {
                 BigDecimal high = index.getHigh();
                 BigDecimal low = index.getLow();
                 BigDecimal close = index.getClose();
+                System.out.println(open);
                 String query = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" + time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
 //                System.out.println(query);
                 statement.execute(query);
