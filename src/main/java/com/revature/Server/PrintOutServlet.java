@@ -25,24 +25,35 @@ public class PrintOutServlet extends HttpServlet {
             Statement statement = connection.createStatement();
 
             ResultSet rs = statement.executeQuery(query);
-            resp.getWriter().println("\tSymbol \t Date \t Open Price \t High Price \t Low Price \t Closed Price");
+            String HTMLTitle = "<h3" +
+                    ">Symbol, Date, Open Price, High Price, Low Price, Closed Price</h3>";
+
+            resp.getWriter().println(HTMLTitle);
             while (rs.next()) {
-//                System.out.println(rs.getString(1) + ", " + rs.getString(2)+ ", " + rs.getString(3));
-                resp.getWriter().println(rs.getString(1) + "\t" + rs.getString(2) + "\t"
-                        + rs.getString(3) + "\t" + rs.getString(4) + "\t" + rs.getString(5)
-                        + "\t" + rs.getString(6) + "\t" + rs.getString(7));
+                String HTMLContent = rs.getString(1) + "\t " + rs.getString(2) + "\t, "
+                        + rs.getString(3) + "\t, " + rs.getString(4) + "\t, " + rs.getString(5)
+                        + "\t, " + rs.getString(6) + "\t, " + rs.getString(7) + ".";
+                String convertContent = "<p>" + HTMLContent + "</p>" + "\n";
+                resp.getWriter().println(convertContent);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        String HTMLFindMoreStockForm = "<form action =\"/home\" method = \"get\">\n" +
-                "    " +
-                "<input type=\"submit\" value=\"Find more stock history\" name=\"homeRedirect\">\n" +
-                "    <" +
-                "br>\n" +
+        String HTMLFindMoreStockForm = "<Html>\n" +
+                "<Head>\n" +
+                "    <Title>Stock History</Title>\n" +
+                "</Head>\n" +
+                "<Body>\n" +
+                "<form action=\"/home\" method=\"get\">\n" +
+                "    <input type=\"submit\" value=\"Find more stock history\" name=\"homeRedirect\">\n" +
+                "    <br" +
+                ">\n" +
                 "</form>\n" +
+                "</Body>\n" +
+                "</Html>\n" +
+                "\n" +
                 "\n";
         resp.getWriter().println(HTMLFindMoreStockForm);
     }

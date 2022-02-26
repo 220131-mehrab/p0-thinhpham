@@ -37,7 +37,7 @@ public class InputStockService extends HttpServlet {
                 "        <input type=\"text\" name=\"startDate\" id=\"startDate\" required>\n" +
                 "    </div>\n" +
                 "    <div class=\"form-example\">\n" +
-                "        <label for=\"endDate\">Start Date: </label>\n" +
+                "        <label for=\"endDate\">End Date: </label>\n" +
                 "        <input type=\"text\" name=\"endDate\" id=\"endDate\" required>\n" +
                 "    </div" +
                 ">\n" +
@@ -45,7 +45,7 @@ public class InputStockService extends HttpServlet {
                 "        <label for=\"interval\">Interval (You can type: yearly, monthly, or daily): </label>\n" +
                 "        <input type=\"text\" name=\"interval\" id=\"interval\" required>\n" +
                 "    </div>\n" +
-                "    <input type=\"submit\" value=\"StockInput\"/>\n" +
+                "    <input type=\"submit\" value=\"Submit\"/>\n" +
                 "</form>\n" +
                 "</Body>\n" +
                 "</Html>";

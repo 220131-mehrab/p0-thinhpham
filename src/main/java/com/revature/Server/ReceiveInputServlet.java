@@ -10,19 +10,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class ReceiveInputServlet extends HttpServlet {
 
     private StockCommands stockCommands;
     private YahooStockAPI yahooStockAPI;
+//    private DatabaseController databaseController;
 
     public ReceiveInputServlet() {
         this.yahooStockAPI = new YahooStockAPI();
+//        this.databaseController = new DatabaseController();
     }
 
     @Override
@@ -44,28 +42,29 @@ public class ReceiveInputServlet extends HttpServlet {
                 ">Symbol, Date, Open Price, High Price, Low Price, Closed Price</h3>";
 
         resp.getWriter().println(HTMLTitle);
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-            Statement statement = connection.createStatement();
+//        try {
+//            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+//            Statement statement = connection.createStatement();
 
-            for (MyStock index : stockList) {
-                String name = index.getName();
-                String time = index.getDate();
-                BigDecimal open = index.getOpen();
-                BigDecimal high = index.getHigh();
-                BigDecimal low = index.getLow();
-                BigDecimal close = index.getClose();
-                System.out.println(open);
-                String query = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" + time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
-//                System.out.println(query);
-                statement.execute(query);
-                HTMLContent = name + ", " + time + ", " + open + ", " + high + ", " + low + ", " + close + ".";
-                convertContent = "<p>" + HTMLContent + "</p>" + "\n";
-                resp.getWriter().println(convertContent);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (MyStock index : stockList) {
+            String name = index.getName();
+            String time = index.getDate();
+            BigDecimal open = index.getOpen();
+            BigDecimal high = index.getHigh();
+            BigDecimal low = index.getLow();
+            BigDecimal close = index.getClose();
+            System.out.println(open);
+//                String query = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" + time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
+//                statement.execute(query);
+//            this.databaseController.InsertData(name, time, open, high, low, close);
+            new DatabaseController().InsertData(name, time, open, high, low, close);
+            HTMLContent = name + ", " + time + ", " + open + ", " + high + ", " + low + ", " + close + ".";
+            convertContent = "<p>" + HTMLContent + "</p>" + "\n";
+            resp.getWriter().println(convertContent);
         }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         String HTMLFindMoreStockForm = "<form action =\"/home\" method = \"get\">\n" +
                 "    " +
@@ -83,7 +82,4 @@ public class ReceiveInputServlet extends HttpServlet {
         resp.getWriter().println(HTMLStockSearchedForm);
     }
 
-    public StockCommands getStockCommands() {
-        return stockCommands;
-    }
 }
