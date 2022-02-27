@@ -1,4 +1,4 @@
-package com.revature.Server;
+package com.revature.Servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

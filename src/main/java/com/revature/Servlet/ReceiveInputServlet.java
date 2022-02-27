@@ -1,8 +1,9 @@
-package com.revature.Server;
+package com.revature.Servlet;
 
-import com.revature.yahoo.stock.api.MyStock;
-import com.revature.yahoo.stock.api.StockCommands;
-import com.revature.yahoo.stock.api.YahooStockAPI;
+import com.revature.Server.DatabaseController;
+import com.revature.domain.MyStock;
+import com.revature.domain.StockCommands;
+import com.revature.YahooApi.YahooStockAPI;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

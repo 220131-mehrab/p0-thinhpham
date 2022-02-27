@@ -1,4 +1,4 @@
-package com.revature.yahoo.stock.api;
+package com.revature.domain;
 
 import java.math.BigDecimal;
 

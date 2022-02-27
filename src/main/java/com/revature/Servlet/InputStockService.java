@@ -1,6 +1,5 @@
-package com.revature.Server;
+package com.revature.Servlet;
 
-import com.revature.yahoo.stock.api.StockCommands;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

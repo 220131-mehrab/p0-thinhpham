@@ -1,13 +1,11 @@
-package com.revature.yahoo.stock.api;
+package com.revature.YahooApi;
 
+import com.revature.domain.MyStock;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

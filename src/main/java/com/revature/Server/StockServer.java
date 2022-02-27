@@ -1,12 +1,10 @@
 package com.revature.Server;
 
+import com.revature.Servlet.InputStockService;
+import com.revature.Servlet.PrintOutServlet;
+import com.revature.Servlet.ReceiveInputServlet;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class StockServer {
     private Tomcat server;
@@ -15,18 +13,6 @@ public class StockServer {
 
     public StockServer() {
         this.server = new Tomcat();
-//        try {
-//
-//            Connection connection = DriverManager.getConnection("jdbc:h2:~/test","sa","");
-//            String query = "DROP TABLE IF EXISTS mystock;";
-//            String query2 = "CREATE TABLE mystock(ID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, NAME VARCHAR(255), " +
-//                    "TIME DATE, OPEN DECIMAL(15,6), HIGH DECIMAL(15,6), LOW DECIMAL(15,6), CLOSE DECIMAL(15,6));";
-//            Statement statement = connection.createStatement();
-//            statement.execute(query);
-//            statement.execute(query2);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         this.inputStockService = new InputStockService();
         this.receiveInputServlet = new ReceiveInputServlet();
         new DatabaseController().CreateTable();

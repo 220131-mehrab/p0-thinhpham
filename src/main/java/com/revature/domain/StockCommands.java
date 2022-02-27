@@ -1,4 +1,4 @@
-package com.revature.yahoo.stock.api;
+package com.revature.domain;
 
 public class StockCommands {
     private String ticker;

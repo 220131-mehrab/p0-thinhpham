@@ -1,10 +1,8 @@
 package com.revature.main;
 
 import com.revature.Server.StockServer;
-import com.revature.Server.InputStockService;
-import com.revature.yahoo.stock.api.MyStock;
-import com.revature.yahoo.stock.api.StockCommands;
-import com.revature.yahoo.stock.api.YahooStockAPI;
+import com.revature.domain.MyStock;
+import com.revature.YahooApi.YahooStockAPI;
 
 public class Controller {
 
