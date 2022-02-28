@@ -4,6 +4,9 @@ import com.revature.Server.StockServer;
 import com.revature.domain.MyStock;
 import com.revature.YahooApi.YahooStockAPI;
 
+/**
+ *
+ */
 public class Controller {
 
     private final YahooStockAPI yahooStockAPI;

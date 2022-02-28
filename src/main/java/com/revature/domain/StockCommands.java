@@ -1,5 +1,8 @@
 package com.revature.domain;
 
+/**
+ *
+ */
 public class StockCommands {
     private String ticker;
     private String startDate;
@@ -9,6 +12,12 @@ public class StockCommands {
     public StockCommands() {
     }
 
+    /**
+     * @param ticker
+     * @param startDate
+     * @param endDate
+     * @param interval
+     */
     public StockCommands(String ticker, String startDate, String endDate, String interval) {
         this.ticker = ticker;
         this.startDate = startDate;

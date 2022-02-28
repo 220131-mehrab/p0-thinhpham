@@ -1,11 +1,15 @@
 package com.revature.Server;
 
-import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.revature.domain.MyStock;
 
+import java.math.BigDecimal;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ */
 public class DatabaseController {
 
 
@@ -14,7 +18,11 @@ public class DatabaseController {
     private final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS mystock;";
     private final String CREATE_TABLE_QUERY = "CREATE TABLE mystock(ID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, NAME VARCHAR(255), " +
             "TIME DATE, OPEN DECIMAL(15,6), HIGH DECIMAL(15,6), LOW DECIMAL(15,6), CLOSE DECIMAL(15,6));";
+    private final String SELECT_ALL_QUERY = "SELECT * FROM MYSTOCK;";
 
+    /**
+     *
+     */
     public void CreateTable() {
         try {
             this.connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
@@ -26,6 +34,14 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * @param name
+     * @param time
+     * @param open
+     * @param high
+     * @param low
+     * @param close
+     */
     public void InsertData(String name, String time, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close) {
         String insertQuery = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" +
                 time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
@@ -42,13 +58,45 @@ public class DatabaseController {
         }
     }
 
-//    public void CleanUpData() {
-//        try {
-//            this.connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-//            this.statement = this.connection.createStatement();
-////            this.statement.execute(query);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    /**
+     * @param rule
+     * @return
+     */
+    public List<MyStock> PrintOut(String rule) {
+//SELECT * FROM MYSTOCK WHERE time >= '2020-05-01' AND time <= '2020-12-01' group by time;
+        List<MyStock> stockList = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery(SELECT_ALL_QUERY);
+
+            ResultSet rs;
+            switch (rule) {
+                case "nameasc":
+                    rs = statement.executeQuery("select * from mystock order by name asc;");
+                    break;
+                case "namedesc":
+                    rs = statement.executeQuery("select * from mystock order by name desc;");
+                    break;
+                case "timedesc":
+                    rs = statement.executeQuery("select * from mystock order by time desc;");
+                    break;
+                default:
+                    rs = statement.executeQuery("select * from mystock order by time asc;");
+
+            }
+            while (rs.next()) {
+                String name = rs.getString(2);
+                String time = rs.getString(3);
+                BigDecimal open = new BigDecimal(rs.getString(4));
+                BigDecimal high = new BigDecimal(rs.getString(5));
+                BigDecimal low = new BigDecimal(rs.getString(6));
+                BigDecimal close = new BigDecimal(rs.getString(7));
+                stockList.add(new MyStock(name, time, open, high, low, close));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stockList;
+    }
 }

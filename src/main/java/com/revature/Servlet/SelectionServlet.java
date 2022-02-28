@@ -7,12 +7,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class InputStockService extends HttpServlet {
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
+/**
+ *
+ */
+public class SelectionServlet extends HttpServlet {
 
     /**
      * @param req
@@ -55,8 +53,5 @@ public class InputStockService extends HttpServlet {
                 "</Body>\n" +
                 "</Html>";
         resp.getWriter().println(HTMLForm);
-
     }
-
-
 }

@@ -13,17 +13,29 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ *
+ */
 public class ReceiveInputServlet extends HttpServlet {
 
     private StockCommands stockCommands;
     private YahooStockAPI yahooStockAPI;
 //    private DatabaseController databaseController;
 
+    /**
+     *
+     */
     public ReceiveInputServlet() {
         this.yahooStockAPI = new YahooStockAPI();
 //        this.databaseController = new DatabaseController();
     }
 
+    /**
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ticker = req.getParameter("ticker");
@@ -76,8 +88,9 @@ public class ReceiveInputServlet extends HttpServlet {
                 "\n";
         resp.getWriter().println(HTMLFindMoreStockForm);
 
-        String HTMLStockSearchedForm = "<form action =\"/printout\" method = \"get\">\n" +
-                "    <input type=\"submit\" value=\"Print all stock searched\" name=\"printout\">\n" +
+        String HTMLStockSearchedForm = "<form action =\"/Selection\" method = \"get\">\n" +
+                "   " +
+                " <input type=\"submit\" value=\"Click here to sort or search\" name=\"printout\">\n" +
                 "    <br>\n" +
                 "</form>\n";
         resp.getWriter().println(HTMLStockSearchedForm);

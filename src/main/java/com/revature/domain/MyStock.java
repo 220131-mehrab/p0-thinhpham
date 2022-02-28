@@ -2,6 +2,9 @@ package com.revature.domain;
 
 import java.math.BigDecimal;
 
+/**
+ *
+ */
 public class MyStock {
     private String name;
     private String date;
@@ -10,6 +13,14 @@ public class MyStock {
     private BigDecimal low;
     private BigDecimal close;
 
+    /**
+     * @param name
+     * @param date
+     * @param open
+     * @param high
+     * @param low
+     * @param close
+     */
     public MyStock(String name, String date, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close) {
         this.name = name;
         this.date = date;

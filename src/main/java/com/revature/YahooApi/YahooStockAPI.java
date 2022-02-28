@@ -17,6 +17,13 @@ import java.util.Locale;
 public class YahooStockAPI {
     private Stock myStock;
 
+    /**
+     * @param stockName
+     * @param from
+     * @param to
+     * @param searchType
+     * @return
+     */
     public List<MyStock> getHistory(String stockName, String from, String to, String searchType) {
         Calendar fromDate = convertDate(from);
         Calendar toDate = convertDate(to);
@@ -75,11 +82,19 @@ public class YahooStockAPI {
 //        return "result.csv";
 //    }
 
+    /**
+     * @param cal
+     * @return
+     */
     public String convertDate(Calendar cal) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(cal.getTime());
     }
 
+    /**
+     * @param cal
+     * @return
+     */
     public Calendar convertDate(String cal) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -91,6 +106,10 @@ public class YahooStockAPI {
         return calendar;
     }
 
+    /**
+     * @param searchType
+     * @return
+     */
     public Interval getInterval(String searchType) {
         Interval interval = null;
         switch (searchType.toUpperCase()) {
