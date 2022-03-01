@@ -62,7 +62,7 @@ public class DatabaseController {
      * @param rule
      * @return
      */
-    public List<MyStock> PrintOut(String rule) {
+    public List<MyStock> PrintOutBySort(String rule) {
 //SELECT * FROM MYSTOCK WHERE time >= '2020-05-01' AND time <= '2020-12-01' group by time;
         List<MyStock> stockList = new ArrayList<>();
         try {
@@ -86,6 +86,28 @@ public class DatabaseController {
 
             }
             while (rs.next()) {
+                String name = rs.getString(2);
+                String time = rs.getString(3);
+                BigDecimal open = new BigDecimal(rs.getString(4));
+                BigDecimal high = new BigDecimal(rs.getString(5));
+                BigDecimal low = new BigDecimal(rs.getString(6));
+                BigDecimal close = new BigDecimal(rs.getString(7));
+                stockList.add(new MyStock(name, time, open, high, low, close));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stockList;
+    }
+
+    public List<MyStock> PrintOutByTime(String startTime, String endTime) {
+        List<MyStock> stockList = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM MYSTOCK WHERE time >= '" + startTime + "' AND time <= '" + endTime + "' ORDER BY time;");
+            while (rs.next()) {
+                rs.getString(1);
                 String name = rs.getString(2);
                 String time = rs.getString(3);
                 BigDecimal open = new BigDecimal(rs.getString(4));

@@ -88,12 +88,25 @@ public class ReceiveInputServlet extends HttpServlet {
                 "\n";
         resp.getWriter().println(HTMLFindMoreStockForm);
 
-        String HTMLStockSearchedForm = "<form action =\"/Selection\" method = \"get\">\n" +
-                "   " +
-                " <input type=\"submit\" value=\"Click here to sort or search\" name=\"printout\">\n" +
-                "    <br>\n" +
-                "</form>\n";
-        resp.getWriter().println(HTMLStockSearchedForm);
+        //language=HTML
+        String HTMLStockSortForm = "<Html>\n" +
+                "<Head>\n" +
+                "</Head>\n" +
+                "<Body>\n" +
+                "<p>Select how you want to print out</p>\n" +
+                "<p>If you want to sort by name ascending type nameasc or namedesc for descending</p>\n" +
+                "<p>If you want to sort by time ascending type timeasc or timedesc for descending</p>\n" +
+                "<form action='/printout' method='get'>\n" +
+                "    <div class=\"form-example\">\n" +
+                "        <label for=\"nameTime\">Type in this box: </label>\n" +
+                "        <input type=\"text\" name=\"nameTime\" id=\"nameTime\" required>\n" +
+                "    </div>\n" +
+                "    <input type=\"submit\" value=\"Submit\"/>\n" +
+                "</form>\n" +
+                "</Body>\n" +
+                "</Html>";
+        resp.getWriter().println(HTMLStockSortForm);
+
     }
 
 }

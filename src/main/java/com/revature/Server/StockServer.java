@@ -28,7 +28,7 @@ public class StockServer {
         this.server.addContext("", null);
         this.server.addServlet("", "Input Stock Servlet", this.inputStockService).addMapping("/home");
         this.server.addServlet("", "Receive InputStock Servlet", this.receiveInputServlet).addMapping("/receive");
-        this.server.addServlet("", "Selection Servlet", this.receiveInputServlet).addMapping("/selection");
+//        this.server.addServlet("", "Selection Servlet", this.receiveInputServlet).addMapping("/selection");
         this.server.addServlet("", "Print Data", new PrintOutServlet()).addMapping("/printout");
         try {
             this.server.start();
