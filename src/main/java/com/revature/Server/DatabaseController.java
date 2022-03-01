@@ -103,7 +103,7 @@ public class DatabaseController {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM MYSTOCK WHERE time >= '" + startTime + "' AND time <= '" + endTime + "' ORDER BY time;");
             while (rs.next()) {
-                rs.getString(1);
+//                rs.getString(1);
                 String name = rs.getString(2);
                 String time = rs.getString(3);
                 BigDecimal open = new BigDecimal(rs.getString(4));

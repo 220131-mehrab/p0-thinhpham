@@ -10,6 +10,7 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,22 +23,14 @@ class YahooStockAPITest {
 
     @Test
     void getHistory() {
-        Calendar fromDate = this.yahooStockAPI.convertDate("2019-12-01");
-        Calendar toDate = this.yahooStockAPI.convertDate("2021-11-01");
-        List<HistoricalQuote> history = null;
-        List<MyStock> stocks = new ArrayList<>();
-        Stock stock = null;
-        try {
-            stock = YahooFinance.get("AAPL");
-            history = stock.getHistory(fromDate, toDate, this.yahooStockAPI.getInterval("monthly"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //The getHistory function of stock variable is not a recursive call but instead the Yahoo API function
-
-
+        BigDecimal open1 = new BigDecimal("66.817497");
+        BigDecimal open2 = new BigDecimal("74.059998");
+        BigDecimal close3 = new BigDecimal("68.339996");
+        BigDecimal close4 = new BigDecimal("63.572498");
+        Assertions.assertEquals(open1, stockList.get(0).getOpen());
+        Assertions.assertEquals(open2, stockList.get(1).getOpen());
+        Assertions.assertEquals(close3, stockList.get(2).getClose());
+        Assertions.assertEquals(close4, stockList.get(3).getClose());
     }
 
 
@@ -45,10 +38,8 @@ class YahooStockAPITest {
     void convertDate() {
 //        System.out.println();
         Assertions.assertEquals("2020-01-01", stockList.get(1).getDate());
-    }
-
-    @Test
-    void testConvertDate() {
+        Calendar testDate = this.yahooStockAPI.convertDate("2020-01-01");
+        Assertions.assertEquals(this.yahooStockAPI.convertDate(stockList.get(1).getDate()), testDate);
     }
 
     @Test
