@@ -46,7 +46,6 @@ public class DatabaseController {
         String insertQuery = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" +
                 time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
         String deleteDuplicateQuery = "DELETE FROM MYSTOCK t1 WHERE t1.id > (SELECT MIN(t2.id) FROM MYSTOCK t2 WHERE t1.time = t2.time  and t1.name = t2.name);";
-        //        System.out.println(query);
         try {
             this.connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
             this.statement = this.connection.createStatement();
@@ -63,15 +62,12 @@ public class DatabaseController {
      * @return
      */
     public List<MyStock> PrintOutBySort(String rule) {
-//SELECT * FROM MYSTOCK WHERE time >= '2020-05-01' AND time <= '2020-12-01' group by time;
         List<MyStock> stockList = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
             Statement statement = connection.createStatement();
-//            ResultSet rs = statement.executeQuery(SELECT_ALL_QUERY);
-
             ResultSet rs;
-            switch (rule) {
+            switch (rule.trim()) {
                 case "nameasc":
                     rs = statement.executeQuery("select * from mystock order by name asc;");
                     break;

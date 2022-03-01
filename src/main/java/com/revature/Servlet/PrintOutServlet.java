@@ -26,7 +26,6 @@ public class PrintOutServlet extends HttpServlet {
         String type = req.getParameter("nameTime");
         String startDay = req.getParameter("startDate");
         String endDay = req.getParameter("endDate");
-//        || type == null || type.isEmpty()
         String HTMLTitle = "<h3" +
                 ">Symbol, Date, Open Price, High Price, Low Price, Closed Price</h3>";
         if (type != null) {

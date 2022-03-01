@@ -35,12 +35,12 @@ public class YahooStockAPI {
             //The getHistory function of stock variable is not a recursive call but instead the Yahoo API function
             history = stock.getHistory(fromDate, toDate, getInterval(searchType));
             history.forEach(quote -> {
-                System.out.println("Symbol: " + quote.getSymbol());
-                System.out.println("Date: " + convertDate(quote.getDate()));
-                System.out.println("High Price: " + quote.getHigh());
-                System.out.println("Low Price: " + quote.getLow());
-                System.out.println("Closed Price: " + quote.getClose());
-                System.out.println("=============================");
+//                System.out.println("Symbol: " + quote.getSymbol());
+//                System.out.println("Date: " + convertDate(quote.getDate()));
+//                System.out.println("High Price: " + quote.getHigh());
+//                System.out.println("Low Price: " + quote.getLow());
+//                System.out.println("Closed Price: " + quote.getClose());
+//                System.out.println("=============================");
                 stocks.add(new MyStock(quote.getSymbol(), convertDate(quote.getDate()), quote.getOpen(), quote.getHigh(), quote.getLow(), quote.getClose()));
             });
         } catch (IOException e) {
