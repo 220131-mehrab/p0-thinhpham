@@ -1,6 +1,7 @@
-# Pokedex
-A Java web app that displays the Pokedex to users through their browsers
+# Stock History
+A Java web app that helps people self-analyze historical data by their choosing stocks.
 
 ## User Stories
-- User can access a landing page that displays list of all Pokemon.
-- 
+- Users can choose stocks along with a start date and an end date. Furthermore, they can choose the intervals. The app support daily, weekly, and monthly.
+- Users can choose to sort their data according to time and ticker's name.
+- Users can choose to search data in a time period.
