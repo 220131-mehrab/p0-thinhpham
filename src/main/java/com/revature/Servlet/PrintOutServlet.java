@@ -11,9 +11,15 @@ import java.io.IOException;
 import java.util.List;
 
 
+/**
+ * This servlet is to print out sorted records and records in a peroid of time
+ */
 public class PrintOutServlet extends HttpServlet {
 
     /**
+     * This method will print out HTML of sorted records and records in a peroid of time
+     * It also ask users to input the period of time
+     * It also provide a button to return to the homepage
      * @param req
      * @param resp
      * @throws ServletException

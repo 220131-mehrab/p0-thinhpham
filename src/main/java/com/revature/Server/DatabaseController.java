@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * The class manages and provides services that relate to database
  */
 public class DatabaseController {
 
@@ -21,7 +21,15 @@ public class DatabaseController {
     private final String SELECT_ALL_QUERY = "SELECT * FROM MYSTOCK;";
 
     /**
-     *
+     *This method will delete a table MYSTOCK
+     * and create a table MYSTOCK with seven columns
+     * ID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY
+     * NAME VARCHAR(255)
+     * TIME DATE
+     * OPEN DECIMAL(15,6)
+     * HIGH DECIMAL(15,6)
+     * LOW DECIMAL(15,6)
+     * CLOSE DECIMAL(15,6)
      */
     public void CreateTable() {
         try {
@@ -35,12 +43,13 @@ public class DatabaseController {
     }
 
     /**
-     * @param name
-     * @param time
-     * @param open
-     * @param high
-     * @param low
-     * @param close
+     * This method is insert data to table MYSTOCK
+     * @param name is the ticker name
+     * @param time is the record day (Format: yyyy-mm-dd)
+     * @param open is the price when the stock opened
+     * @param high is the price when the stock is at the highest
+     * @param low is the price when the stock is at the lowest
+     * @param close is the price when the stock closed
      */
     public void InsertData(String name, String time, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close) {
         String insertQuery = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" +
@@ -58,8 +67,14 @@ public class DatabaseController {
     }
 
     /**
-     * @param rule
-     * @return
+     * This method will create and return an ascending or descending
+     * sorted list by name and time according to users.
+     * @param rule is a string. Users have four options
+     *             nameasc for name ascending order
+     *             namedesc for name descending order
+     *             timeasc for time ascending (default)
+     *             timedesc for time descending
+     * @return a list of MyStock objects
      */
     public List<MyStock> PrintOutBySort(String rule) {
         List<MyStock> stockList = new ArrayList<>();
@@ -96,6 +111,12 @@ public class DatabaseController {
         return stockList;
     }
 
+    /**
+     * This method will create and return a list of all the record in a period of time and order by time
+     * @param startTime is the starting time
+     * @param endTime is the ending time
+     * @return a list of MyStock objects
+     */
     public List<MyStock> PrintOutByTime(String startTime, String endTime) {
         List<MyStock> stockList = new ArrayList<>();
         try {

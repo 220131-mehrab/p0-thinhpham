@@ -14,15 +14,20 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * This class is to communicate with the yahoo api
+ */
 public class YahooStockAPI {
     private Stock myStock;
 
     /**
-     * @param stockName
-     * @param from
-     * @param to
-     * @param searchType
-     * @return
+     * The method is to convert the input from the homepage to the yahoo api
+     * The api will return a list of stocks object
+     * @param stockName is ticker name
+     * @param from starting date but in String
+     * @param to ending date but in String
+     * @param searchType can be daily, weekly, or monthly
+     * @return list of MyStock objects
      */
     public List<MyStock> getHistory(String stockName, String from, String to, String searchType) {
         Calendar fromDate = convertDate(from);
@@ -48,7 +53,9 @@ public class YahooStockAPI {
         }
         return stocks;
     }
-
+/**
+ * This commented out method is to write to a file and save it as a csv file
+ */
 //    public String WriteToFile(String stockName, String from, String to, String searchType) {
 //        BufferedWriter output = null;
 //        List<HistoricalQuote> history;
@@ -83,8 +90,9 @@ public class YahooStockAPI {
 //    }
 
     /**
-     * @param cal
-     * @return
+     * This method is to convert a Calendar type(yyyy-mm-dd) to a String
+     * @param cal calendar variable type
+     * @return a yyyy-mm-dd in String
      */
     public String convertDate(Calendar cal) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -92,8 +100,9 @@ public class YahooStockAPI {
     }
 
     /**
-     * @param cal
-     * @return
+     * This method is to convert a String(yyyy-mm-dd) to a Calendar object
+     * @param cal string variable type
+     * @return a Calendar object of the input String(yyyy-mm-dd)
      */
     public Calendar convertDate(String cal) {
         Calendar calendar = Calendar.getInstance();
@@ -107,8 +116,9 @@ public class YahooStockAPI {
     }
 
     /**
-     * @param searchType
-     * @return
+     * This method is to get static variable Interval
+     * @param searchType daily, weekly, monthly
+     * @return Interval static variable
      */
     public Interval getInterval(String searchType) {
         Interval interval = null;
@@ -121,7 +131,6 @@ public class YahooStockAPI {
                 break;
             case "DAILY":
                 interval = Interval.DAILY;
-
         }
         return interval;
     }

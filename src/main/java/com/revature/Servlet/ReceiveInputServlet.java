@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- *
+ *This class is to process the inputs from the homepage inputs
  */
 public class ReceiveInputServlet extends HttpServlet {
 
@@ -29,6 +29,9 @@ public class ReceiveInputServlet extends HttpServlet {
     }
 
     /**
+     * This method is to receive inputs from the homepage and use the yahoo api to create a list of stocks
+     * The list will be added to the database. Duplicate would be deleted
+     * The method also ask users how they want to sort their result
      * @param req
      * @param resp
      * @throws ServletException

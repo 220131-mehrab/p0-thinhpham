@@ -8,7 +8,7 @@ import org.apache.catalina.startup.Tomcat;
 
 
 /**
- *
+ * This class is to create a Tomcat server and add servlets
  */
 public class StockServer {
     private Tomcat server;

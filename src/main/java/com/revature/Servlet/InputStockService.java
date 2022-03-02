@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * This class is the landing page.
+ */
 public class InputStockService extends HttpServlet {
 
     @Override
@@ -15,8 +18,9 @@ public class InputStockService extends HttpServlet {
     }
 
     /**
-     * @param req
-     * @param resp
+     * This method is to create an HTML page that asks user inputs
+     * @param req request of tomcat
+     * @param resp response of tomcat
      * @throws ServletException
      * @throws IOException
      */
