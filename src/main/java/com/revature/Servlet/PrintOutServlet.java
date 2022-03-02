@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 
@@ -26,38 +25,60 @@ public class PrintOutServlet extends HttpServlet {
         String type = req.getParameter("nameTime");
         String startDay = req.getParameter("startDate");
         String endDay = req.getParameter("endDate");
-        String HTMLTitle = "<h3" +
-                ">Symbol, Date, Open Price, High Price, Low Price, Closed Price</h3>";
+        //language=HTML
+        String head = "<style>\n" +
+                "table, th, td {\n" +
+                "  border:1px solid black;\n" +
+                "  text-align: center;\n" +
+                "}\n" +
+                "</style>\n" +
+                "<table style=\"width:60%\">\n" +
+                "    <tr>\n" +
+                "        <th>No</th>\n" +
+                "        <th>Symbol" +
+                "</th>\n" +
+                "        <th>Date</th>\n" +
+                "        <th>Open Price</th>\n" +
+                "        <th>High Price</th>\n" +
+                "        <th>Low Price</th>\n" +
+                "        <th>Close Price</th>\n" +
+                "    " +
+                "</tr>\n";
+        String body = "";
+        String tail = "</table>";
+        int i = 1;
+
         if (type != null) {
-            resp.getWriter().println(HTMLTitle);
             List<MyStock> stockList = new DatabaseController().PrintOutBySort(type);
-            stockList.forEach(myStock -> {
-                String HTMLContent = myStock.getName() + "\t " + myStock.getDate() + "\t, "
-                        + myStock.getOpen() + "\t, " + myStock.getHigh() + "\t, " + myStock.getLow()
-                        + "\t, " + myStock.getClose() + ".";
-                String convertContent = "<p>" + HTMLContent + "</p>" + "\n";
-                try {
-                    resp.getWriter().println(convertContent);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+            for (MyStock stock : stockList) {
+                String content = "<tr><td>" + i + "</td><td>" + stock.getName() + "</td><td>" + stock.getDate() + "</td><td>" +
+                        stock.getOpen() + "</td><td>" + stock.getHigh() + "</td><td>" + stock.getLow() + "</td><td>" +
+                        stock.getClose() + "</td> </tr>";
+                body += content;
+                i++;
+            }
+            try {
+                resp.getWriter().println(head + body + tail);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
         if (startDay != null && endDay != null) {
-            resp.getWriter().println(HTMLTitle);
             List<MyStock> stockList = new DatabaseController().PrintOutByTime(startDay, endDay);
-            stockList.forEach(myStock -> {
-                String HTMLContent = myStock.getName() + "\t " + myStock.getDate() + "\t, "
-                        + myStock.getOpen() + "\t, " + myStock.getHigh() + "\t, " + myStock.getLow()
-                        + "\t, " + myStock.getClose() + ".";
-                String convertContent = "<p>" + HTMLContent + "</p>" + "\n";
-                try {
-                    resp.getWriter().println(convertContent);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+            for (MyStock stock : stockList) {
+                String content = "<tr><td>" + i + "</td><td>" + stock.getName() + "</td><td>" + stock.getDate() + "</td><td>" +
+                        stock.getOpen() + "</td><td>" + stock.getHigh() + "</td><td>" + stock.getLow() + "</td><td>" +
+                        stock.getClose() + "</td> </tr>";
+                body += content;
+                i++;
+            }
+            try {
+                resp.getWriter().println(head + body + tail);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -77,7 +98,6 @@ public class PrintOutServlet extends HttpServlet {
                 "\n";
         resp.getWriter().println(HTMLFindMoreStockForm);
 
-        //language=HTML
         String HTMLStockSearchForm = "<Html>\n" +
                 "<Head>\n" +
                 "</Head>\n" +

@@ -20,14 +20,12 @@ public class ReceiveInputServlet extends HttpServlet {
 
     private StockCommands stockCommands;
     private YahooStockAPI yahooStockAPI;
-//    private DatabaseController databaseController;
 
     /**
      *
      */
     public ReceiveInputServlet() {
         this.yahooStockAPI = new YahooStockAPI();
-//        this.databaseController = new DatabaseController();
     }
 
     /**
@@ -39,25 +37,33 @@ public class ReceiveInputServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ticker = req.getParameter("ticker");
-//        System.out.println("Ticker: " + ticker);
         String startDate = req.getParameter("startDate");
-//        System.out.println("Start: " + startDate);
         String endDate = req.getParameter("endDate");
-//        System.out.println("End: " + endDate);
         String interval = req.getParameter("interval");
-//        System.out.println("Interval: " + interval);
-        String HTMLContent = "";
-        String convertContent = "";
         stockCommands = new StockCommands(ticker, startDate, endDate, interval);
         List<MyStock> stockList = this.yahooStockAPI.getHistory(this.stockCommands.getTicker(),
                 this.stockCommands.getStartDate(), this.stockCommands.getEndDate(), this.stockCommands.getInterval());
-        String HTMLTitle = "<h3" +
-                ">Symbol, Date, Open Price, High Price, Low Price, Closed Price</h3>";
-
-        resp.getWriter().println(HTMLTitle);
-//        try {
-//            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-//            Statement statement = connection.createStatement();
+        String head = "<style>\n" +
+                "table, th, td {\n" +
+                "  border:1px solid black;\n" +
+                "  text-align: center;\n" +
+                "}\n" +
+                "</style>\n" +
+                "<table style=\"width:60%\">\n" +
+                "    <tr>\n" +
+                "        <th>No</th>\n" +
+                "        <th>Symbol" +
+                "</th>\n" +
+                "        <th>Date</th>\n" +
+                "        <th>Open Price</th>\n" +
+                "        <th>High Price</th>\n" +
+                "        <th>Low Price</th>\n" +
+                "        <th>Close Price</th>\n" +
+                "    " +
+                "</tr>\n";
+        String body = "";
+        String tail = "</table>";
+        int i = 1;
 
         for (MyStock index : stockList) {
             String name = index.getName();
@@ -66,18 +72,17 @@ public class ReceiveInputServlet extends HttpServlet {
             BigDecimal high = index.getHigh();
             BigDecimal low = index.getLow();
             BigDecimal close = index.getClose();
-//            System.out.println(open);
-//                String query = "insert into mystock (name, time, open, high, low, close) values ('" + name + "', '" + time + "', " + open + ", " + high + ", " + low + ", " + close + ");";
-//                statement.execute(query);
-//            this.databaseController.InsertData(name, time, open, high, low, close);
             new DatabaseController().InsertData(name, time, open, high, low, close);
-            HTMLContent = name + ", " + time + ", " + open + ", " + high + ", " + low + ", " + close + ".";
-            convertContent = "<p>" + HTMLContent + "</p>" + "\n";
-            resp.getWriter().println(convertContent);
+            String content = "<tr><td>" + i + "</td><td>" + name + "</td><td>" + time + "</td><td>" + open
+                    + "</td><td>" + high + "</td><td>" + low + "</td><td>" + close + "</td> </tr>";
+            body += content;
+            i++;
         }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            resp.getWriter().println(head + body + tail);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         String HTMLFindMoreStockForm = "<form action =\"/home\" method = \"get\">\n" +
                 "    " +
